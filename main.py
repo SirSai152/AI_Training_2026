@@ -29,7 +29,7 @@ def count_passed(scores):
 for i in range(5):
 	
 	print(f"Enter details for student {i + 1}:")
-	name = str(input("Name: "))
+	name = str(input("Name: ")).strip()
 	Age = int(input("Age: "))
 	study_hours = str(input("StudyHours: "))
 	scores = float(input("PythonScore: "))
@@ -44,17 +44,21 @@ for student in students:
 		f"PythonScore: {student['mark']}\n"
 		f"Grade: {classify_score(student['mark'])}"
 	)
+	
 print("===== SUMMARY =====")
 print("Total Students:", len(students))
-all_scores = [student["mark"] for student in students]
-py_point = calculate_average(all_scores)
-print("Average Score:", py_point)
-print("Highest Score:", max(all_scores))
-print("Lowest Score:", min(all_scores))
-result = count_passed(all_scores)
+Total_score = [student["mark"] for student in students]
+py_point = calculate_average(Total_score)
+print("Average Score:", round(py_point, 2))
+print("Highest Score:", max(Total_score))
+print("Lowest Score:", min(Total_score))
+result = count_passed(Total_score)
 print("Passed Students:", result)
 print("Failed Students:", len(students) - result)
-top_student = max(students, key=lambda student: student["mark"])
+
+top_student = students[0]
+for student in students:
+	if student['mark'] > top_student['mark']:
+		top_student = student
 print("Top Student:", top_student["name"])
  
-
